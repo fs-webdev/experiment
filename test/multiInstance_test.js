@@ -7,8 +7,8 @@ vows.describe("multiInstance").addBatch({
     "with valid config files": {
       topic: function () {
         var err,
-            instance1 = require("./../lib"),
-            instance2 = require("./../lib");
+            instance1 = require("./../lib")(),
+            instance2 = require("./../lib")();
 
         try {
           instance1.configureFromFile(path.resolve(__dirname, "instance1.json"));
