@@ -1,6 +1,6 @@
 var assert = require("assert"),
     vows = require("vows"),
-    Experiment = require("./../lib/experiment");
+    Experiment = require("./../lib/experiment")({});
 
 var guid = 1;
 
