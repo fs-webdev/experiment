@@ -2,7 +2,7 @@ var assert = require("assert"),
     vows = require("vows"),
     path = require("path"),
     ejs = require("ejs"),
-    experiment = require("./../lib");
+    experiment = require("./../lib")();
 
 experiment.configure({
     experiments: {

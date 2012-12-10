@@ -2,7 +2,7 @@ var assert = require("assert"),
     vows = require("vows"),
     path = require("path"),
     eco = require("eco"),
-    experiment = require("./../lib");
+    experiment = require("./../lib")();
     eco_plugin = require("./../lib/eco_plugin");
 
 experiment.configure({

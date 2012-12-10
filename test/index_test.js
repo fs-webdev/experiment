@@ -2,10 +2,8 @@ var assert = require("assert"),
     vows = require("vows"),
     path = require("path"),
     mustache = require("mustache"),
-    experiment = require("./../lib"),
-    errors = require("./../lib/errors"),
-    Group = require("./../lib/group"),
-    Experiment = require("./../lib/experiment");
+    experiment = require("./../lib")(),
+    errors = require("./../lib/errors");
 
 vows.describe("experiment").addBatch({
     "configureFromFile": {
@@ -36,21 +34,6 @@ vows.describe("experiment").addBatch({
             },
             "should succeed": function (err) {
                 assert.ok(!err);
-            },
-            "should create the specified groups": function (err) {
-                assert.ok(Group.byName("family search"));
-                assert.ok(Group.byName("phase 1"));
-                assert.ok(Group.byName("phase 2"));
-                assert.ok(Group.byName("phase 3"));
-            },
-            "should create the specified experiments": function (err) {
-                assert.ok(Experiment.byName("featureOne"));
-                assert.ok(Experiment.byName("featureTwo"));
-                assert.ok(Experiment.byName("featureThree"));
-            },
-            "should create the specified variants": function (err) {
-                var featureThree = Experiment.byName("featureThree");
-                assert.equal(featureThree.variants.length, 2);
             },
 
             "protect": {
