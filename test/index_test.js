@@ -39,7 +39,7 @@ vows.describe("experiment").addBatch({
             "protect": {
                 "when called with an unknown experiment name": {
                     topic: function () {
-                        var exps = experiment.readFor(experiment.contextFor(null, 11));
+                        var exps = experiment.readFor(experiment.contextFor(1, 11));
                         var data = "no";
 
                         experiment.protect("non-existent feature", exps, function () {
@@ -54,9 +54,9 @@ vows.describe("experiment").addBatch({
                 },
 
                 "when called with an experiment name and a single function": {
-                    "for a sessionId that is NOT part of the experiment": {
+                    "for a bucket that is NOT part of the experiment": {
                         topic: function () {
-                            var exps = experiment.readFor(experiment.contextFor(null));
+                            var exps = experiment.readFor(experiment.contextFor(1));
                             var data = "no";
 
                             experiment.protect("featureOne", exps, function () {
@@ -69,7 +69,7 @@ vows.describe("experiment").addBatch({
                             assert.equal(data, "no");
                         }
                     },
-                    "for a sessionId that IS part of the experiment": {
+                    "for a bucket that IS part of the experiment": {
                         topic: function () {
                             var exps = experiment.readFor(experiment.contextFor(30));
                             var data = "no";
@@ -379,38 +379,37 @@ vows.describe("experiment").addBatch({
                 }
             },
 
-            "experimentsFor with no sessionId or userId": {
+            "experimentsFor with no bucket or userId": {
                 topic: function() {
                     var context = experiment.contextFor();
                     return experiment.readFor(context);
                 },
                 "should contain valid experiment tree": function(exps) {
                     assert.isObject(exps);
-                    assert.isNumber(exps.sessionId);
+                    assert.isNumber(exps.bucket);
                     var features = exps.features;
                     assert.isObject(features);
-                    assert.isFalse(features.featureOne);
-                    assert.isFalse(features.featureTwo);
+                    //assert.isFalse(features.featureOne);
+                    //assert.isFalse(features.featureTwo);
                     
                     var featureThree = features.featureThree;
                     assert.isObject(featureThree);
-                    assert.isTrue(featureThree.variantOne);
-                    assert.isFalse(featureThree.variantTwo);
+                    assert.isTrue(featureThree.variantOne == !featureThree.variantTwo);
                     
                     assert.isTrue(features.featureFour);
                     assert.isFalse(features.featureFive);
                 }
             },
             
-            "experimentsFor with a sessionId but no userId": {
+            "experimentsFor with a bucket but no userId": {
                 topic: function() {
                     var context = experiment.contextFor(50);
                     return experiment.readFor(context);
                 },
                 "should contain valid experiment tree": function(exps) {
                     assert.isObject(exps);
-                    assert.isNumber(exps.sessionId);
-                    assert.equal(50, exps.sessionId);
+                    assert.isNumber(exps.bucket);
+                    assert.equal(50, exps.bucket);
                     var features = exps.features;
                     assert.isObject(features);
                     assert.isFalse(features.featureOne);
@@ -428,7 +427,7 @@ vows.describe("experiment").addBatch({
                   topic: function(origExps) {
                     var exps = JSON.parse(JSON.stringify(origExps));//hack because I didn't have access to a clone method
                     exps.dirtyFeatures.push('featureTwo');
-                    var context = experiment.contextFor(exps.sessionId, 22);
+                    var context = experiment.contextFor(exps.bucket, 22);
                     return experiment.readFor(context, exps);
                   },
                   "should not have updated featureTwo experiment": function(exps) {
@@ -438,7 +437,7 @@ vows.describe("experiment").addBatch({
                 "now update with a userId and no dirty flags": {
                   topic: function(exps) {
                     exps.dirtyFeatures = [];
-                    var context = experiment.contextFor(exps.sessionId, 22);
+                    var context = experiment.contextFor(exps.bucket, 22);
                     return experiment.readFor(context, exps);
                   },
                   "should have updated featureTwo experiment": function(exps) {
@@ -447,14 +446,14 @@ vows.describe("experiment").addBatch({
                 }
             },
             
-            "experimentsFor with a sessionId and a userId": {
+            "experimentsFor with a bucket and a userId": {
                 topic: function() {
                     var context = experiment.contextFor(50, 22);
                     return experiment.readFor(context);
                 },
                 "should contain valid experiment tree": function(exps) {
                     assert.isObject(exps);
-                    assert.isNumber(exps.sessionId);
+                    assert.isNumber(exps.bucket);
                     var features = exps.features;
                     assert.isObject(features);
                     assert.isFalse(features.featureOne);
