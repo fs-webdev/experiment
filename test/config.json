@@ -13,6 +13,8 @@
             "variantTwo": "21-100%"
         },
         "featureFour": true,
-        "featureFive": false
+        "featureFive": false,
+        "featureSix": 1,
+        "featureSeven": 0
     }
 }

@@ -379,6 +379,26 @@ vows.describe("experiment").addBatch({
                 }
             },
 
+            "feature with always on, binary": {
+                topic: function () {
+                    var exps = experiment.readFor(experiment.contextFor(50));
+                    return experiment.feature("featureSix", exps);
+                },
+                "should return valid variant": function (variant) {
+                    assert.isTrue(variant);
+                }
+            },
+
+            "feature with always off, binary": {
+                topic: function () {
+                    var exps = experiment.readFor(experiment.contextFor(50));
+                    return experiment.feature("featureSeven", exps);
+                },
+                "should return false": function (variant) {
+                    assert.isFalse(variant);
+                }
+            },
+
             "experimentsFor with no bucket or userId": {
                 topic: function() {
                     var context = experiment.contextFor();
@@ -391,16 +411,16 @@ vows.describe("experiment").addBatch({
                     assert.isObject(features);
                     //assert.isFalse(features.featureOne);
                     //assert.isFalse(features.featureTwo);
-                    
+
                     var featureThree = features.featureThree;
                     assert.isObject(featureThree);
                     assert.isTrue(featureThree.variantOne == !featureThree.variantTwo);
-                    
+
                     assert.isTrue(features.featureFour);
                     assert.isFalse(features.featureFive);
                 }
             },
-            
+
             "experimentsFor with a bucket but no userId": {
                 topic: function() {
                     var context = experiment.contextFor(50);
@@ -414,12 +434,12 @@ vows.describe("experiment").addBatch({
                     assert.isObject(features);
                     assert.isFalse(features.featureOne);
                     assert.isFalse(features.featureTwo);
-                    
+
                     var featureThree = features.featureThree;
                     assert.isObject(featureThree);
                     assert.isFalse(featureThree.variantOne);
                     assert.isTrue(featureThree.variantTwo);
-                    
+
                     assert.isTrue(features.featureFour);
                     assert.isFalse(features.featureFive);
                 },
@@ -445,7 +465,7 @@ vows.describe("experiment").addBatch({
                   }
                 }
             },
-            
+
             "experimentsFor with a bucket and a userId": {
                 topic: function() {
                     var context = experiment.contextFor(50, 22);
@@ -458,12 +478,12 @@ vows.describe("experiment").addBatch({
                     assert.isObject(features);
                     assert.isFalse(features.featureOne);
                     assert.isTrue(features.featureTwo);
-                    
+
                     var featureThree = features.featureThree;
                     assert.isObject(featureThree);
                     assert.isFalse(featureThree.variantOne);
                     assert.isTrue(featureThree.variantTwo);
-                    
+
                     assert.isTrue(features.featureFour);
                     assert.isFalse(features.featureFive);
                 }
