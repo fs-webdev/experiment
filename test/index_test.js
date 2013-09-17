@@ -385,7 +385,7 @@ vows.describe("experiment").addBatch({
                     return experiment.feature("featureSix", exps);
                 },
                 "should return valid variant": function (variant) {
-                    assert.isTrue(variant);
+                    assert.equal(variant, 1);
                 }
             },
 
@@ -395,7 +395,7 @@ vows.describe("experiment").addBatch({
                     return experiment.feature("featureSeven", exps);
                 },
                 "should return false": function (variant) {
-                    assert.isFalse(variant);
+                    assert.equal(variant, 0);
                 }
             },
 
