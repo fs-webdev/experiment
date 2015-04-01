@@ -69,6 +69,7 @@ Each property of the `groups` object specifies the name of a group of users. It
 may have any of the following values:
 
   * A user id
+  * The name of a user group
   * A percentage of users
   * An array of user id(s) and/or a percentage of users
 
@@ -127,6 +128,15 @@ code with simple if statements.
         // of the experiment.
     }
 
+Aside from a simple `userId`, you can also use a user object. This allows you to enable experiments for predefined "groups" of users defined by your own application. The `id`, `name`, and `groups` (array) properties are used for experiment enabling.
+
+    var context = experiment.contextFor(userId);
+    var context = experiment.contextFor({
+        id: userId,
+        name: userName,
+        groups: [ 'groups', 'the', 'user', 'belongs', 'to' ]
+    });
+
 In addition to protecting code with an if statement, you can also use a
 switch statement to vary the code run for each variant.
 
@@ -162,7 +172,7 @@ It works exactly the same way in EJS views:
 
 ## Conditional Usage
 
-For cases where you want to use the native conditional support of the language, 
+For cases where you want to use the native conditional support of the language,
 a `feature` function is provided.  The `feature` function takes in a feature name
 and context and returns either the name of the variant active for the given context,
 or false if no variants are active.  This can be useful in multiple ways, such as:
