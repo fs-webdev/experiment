@@ -1,3 +1,5 @@
+This is a fork of https://github.com/fs-webdev/experiment
+
 This package is a simple framework for building experiments in node apps. The
 purpose is to be able to run certain segments of code only when a user who is
 part of a certain experiment is using the app.
