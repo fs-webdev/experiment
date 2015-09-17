@@ -1,8 +1,8 @@
 {
   "author": "FamilySearch Web Developers",
-  "name": "experiment",
+  "name": "xpr-experiment",
   "description": "A simple framework for running UI experiments in web apps",
-  "version": "0.2.0",
+  "version": "1.1.0",
   "repository": {
     "type": "git",
     "url": "git://github.com/fs-webdev/experiment.git"
@@ -23,10 +23,10 @@
     "ejs": "0.5.0",
     "eco": "1.1.0-rc-1"
   },
-  "private": true,
   "contributors": [
     "Michael Jackson <mjijackson@gmail.com>",
     "Tim Shadel <tim.shadel@familysearch.org>",
-    "Stephen Lynn <s.lynn@familysearch.org>"
+    "Stephen Lynn <s.lynn@familysearch.org>",
+    "Dan Crews <crewsd@gmail.com>"
   ]
 }
