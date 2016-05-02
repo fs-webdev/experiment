@@ -399,6 +399,44 @@ vows.describe("experiment").addBatch({
                 }
             },
 
+            "feature with range 0 to 0": {
+                topic: function () {
+                    var exps = experiment.readFor(experiment.contextFor(1));
+                    return experiment.feature("featureOnePercent", exps);
+                },
+                "should return false": function (variant) {
+                    assert.isFalse(!!variant);
+                },
+                "and bucket zero": {
+                    topic: function () {
+                        var exps = experiment.readFor(experiment.contextFor(0));
+                        return experiment.feature("featureOnePercent", exps);
+                    },
+                    "should return true": function (variant) {
+                        assert.isTrue(!!variant);
+                    }
+                }
+            },
+
+            "feature with group range 0 to 0": {
+                topic: function () {
+                    var exps = experiment.readFor(experiment.contextFor(1));
+                    return experiment.feature("featureGroupOnePercent", exps);
+                },
+                "should return false": function (variant) {
+                    assert.isFalse(!!variant);
+                },
+                "and bucket zero": {
+                    topic: function () {
+                        var exps = experiment.readFor(experiment.contextFor(0));
+                        return experiment.feature("featureGroupOnePercent", exps);
+                    },
+                    "should return true": function (variant) {
+                        assert.isTrue(!!variant);
+                    }
+                }
+            },
+
             "experimentsFor with no bucket or userId": {
                 topic: function() {
                     var context = experiment.contextFor();
