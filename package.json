@@ -19,7 +19,6 @@
   },
   "devDependencies": {
     "eco": "1.1.0-rc-3",
-    "ejs": "^2.5.7",
     "mustache": "^2.3.0",
     "vows": "0.8.1"
   },
