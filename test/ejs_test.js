@@ -20,10 +20,8 @@ vows.describe("ejs").addBatch({
                 var withUser = function(user) {
                     var exps = experiment.readFor(experiment.contextFor(user));
                      return ejs.render(template, {
-                        locals: {
-                            experiment: experiment,
-                            exps: exps
-                        }
+                        experiment: experiment,
+                        exps: exps
                     }).replace(/^\s\s*/, '').replace(/\s\s*$/, '');
                 }
                 return withUser;
