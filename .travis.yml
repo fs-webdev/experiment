@@ -23,4 +23,4 @@ deploy:
   email: "dl-fh-eng-frontier@groups.ldschurch.org"
   api_key: "$NPM_PUBLISH_TOKEN"
   on:
-    branch: master 
+    branch: artifactory-publish
