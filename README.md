@@ -2,6 +2,9 @@ This package is a simple framework for building experiments in node apps. The
 purpose is to be able to run certain segments of code only when a user who is
 part of a certain experiment is using the app.
 
+## NPM Publish Warning
+This repo has a special branch called "artifactory-publish" that publishes to artifactory. Any changes to the master branch should be merged into the artifactory-publish branch as well as the version bumped so a new version will get published.
+
 ## Guiding Principles
 
 Make it easy:
@@ -108,7 +111,7 @@ The basic pattern of usage has three steps:
 The example below shows how all three steps can be used inside some
 code with simple if statements.
 
-    var experiment = require("experiment");
+    var experiment = require("@fs/experiment");
     experiment.configureFromFile("config.json");
 
     // Create a context with the id of the current user.
