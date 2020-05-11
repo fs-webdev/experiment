@@ -1,11 +1,6 @@
 language: node_js
 node_js:
-  - "node"
-  - "6"
-  - "5"
-  - "4"
-  - "0.12"
-  - "0.10"
+  - 12
 sudo: false
 env:
   - CXX=g++-4.8
@@ -15,3 +10,13 @@ addons:
       - ubuntu-toolchain-r-test
     packages:
       - g++-4.8
+before_install:
+  - echo "//repo.churchofjesuschrist.org/artifactory/api/npm/npm-fhd/:_authToken=${NPM_PUBLISH_TOKEN}" >> .npmrc
+  - echo "@fs:registry=https://repo.churchofjesuschrist.org/artifactory/api/npm/npm-fhd/" >> .npmrc
+deploy:
+  provider: npm
+  skip_cleanup: true
+  email: "dl-fh-eng-frontier@groups.ldschurch.org"
+  api_key: "$NPM_PUBLISH_TOKEN"
+  on:
+    branch: master 
