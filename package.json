@@ -1,8 +1,8 @@
 {
   "author": "FamilySearch Web Developers",
-  "name": "experiment",
+  "name": "@fs/experiment",
   "description": "A simple framework for running UI experiments in web apps",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "repository": {
     "type": "git",
     "url": "git://github.com/fs-webdev/experiment.git"
