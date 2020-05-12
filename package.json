@@ -22,7 +22,6 @@
     "mustache": "^2.3.0",
     "vows": "0.8.1"
   },
-  "private": true,
   "contributors": [
     "Michael Jackson <mjijackson@gmail.com>",
     "Tim Shadel <tim.shadel@familysearch.org>",
